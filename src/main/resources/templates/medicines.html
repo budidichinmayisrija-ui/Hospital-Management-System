@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pharmacy Management</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f6fa;
+            margin: 30px;
+        }
+
+        h1 {
+            color: #174a7e;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #174a7e;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #174a7e;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Pharmacy Management System</h1>
+
+    <h2>Add Medicine Details</h2>
+
+    <form action="/medicines" method="post">
+
+        <label>Medicine Name</label>
+        <input type="text" name="medicineName" required>
+
+        <label>Manufacturer</label>
+        <input type="text" name="manufacturer" required>
+
+        <label>Available Quantity</label>
+        <input type="number" name="quantity"
+               min="0" required>
+
+        <label>Price (₹)</label>
+        <input type="number" name="price"
+               min="0" step="0.01" required>
+
+        <label>Expiry Date</label>
+        <input type="date" name="expiryDate" required>
+
+        <button type="submit">Save Medicine</button>
+
+    </form>
+
+    <h2>Available Medicine Stock</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Medicine Name</th>
+                <th>Manufacturer</th>
+                <th>Quantity</th>
+                <th>Price (₹)</th>
+                <th>Expiry Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="medicine : ${medicines}">
+                <td th:text="${medicine.id}"></td>
+                <td th:text="${medicine.medicineName}"></td>
+                <td th:text="${medicine.manufacturer}"></td>
+                <td th:text="${medicine.quantity}"></td>
+                <td th:text="${medicine.price}"></td>
+                <td th:text="${medicine.expiryDate}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
