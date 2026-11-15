@@ -1,3 +1,4 @@
+
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
@@ -31,3 +32,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# H2 Database files
+data/
+*.mv.db
+*.trace.db
+
+# Local environment files
+.env
