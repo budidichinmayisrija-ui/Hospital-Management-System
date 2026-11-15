@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patient Admission Management</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6fc;
+            margin: 30px;
+        }
+
+        h1 {
+            color: #1b4f72;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        input {
+            padding: 10px;
+            margin: 8px;
+            width: 90%;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #1b4f72;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1b4f72;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Patient Admission and Discharge Management</h1>
+
+    <h2>Add Patient Admission Details</h2>
+
+    <form action="/admissions" method="post">
+
+        <input type="text" name="patientName"
+               placeholder="Patient Name" required>
+
+        <input type="text" name="roomNumber"
+               placeholder="Room Number" required>
+
+        <label>Admission Date:</label>
+        <input type="date" name="admissionDate" required>
+
+        <label>Discharge Date:</label>
+        <input type="date" name="dischargeDate">
+
+        <input type="text" name="status"
+               placeholder="Admission Status (Admitted / Discharged)"
+               required>
+
+        <button type="submit">Save Admission Details</button>
+
+    </form>
+
+    <h2>Patient Admission Records</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patient Name</th>
+                <th>Room Number</th>
+                <th>Admission Date</th>
+                <th>Discharge Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="admission : ${admissionList}">
+                <td th:text="${admission.id}"></td>
+                <td th:text="${admission.patientName}"></td>
+                <td th:text="${admission.roomNumber}"></td>
+                <td th:text="${admission.admissionDate}"></td>
+                <td th:text="${admission.dischargeDate}"></td>
+                <td th:text="${admission.status}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
