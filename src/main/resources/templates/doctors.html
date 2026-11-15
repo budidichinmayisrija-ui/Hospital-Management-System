@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctor Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f6fc;
+            margin: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #234a75;
+        }
+
+        .container {
+            width: 75%;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0 15px;
+        }
+
+        button {
+            background: #1677c8;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #234a75;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Doctor Management System</h1>
+
+    <h2>Doctor Registration</h2>
+
+    <form action="/doctors" method="post">
+
+        <label>Doctor Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Specialization:</label>
+        <input type="text" name="specialization" required>
+
+        <label>Phone Number:</label>
+        <input type="text" name="phone" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Qualification:</label>
+        <input type="text" name="qualification" required>
+
+        <button type="submit">Register Doctor</button>
+
+    </form>
+
+    <h2>Registered Doctors</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Specialization</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Qualification</th>
+        </tr>
+
+        <tr th:each="doctor : ${doctors}">
+            <td th:text="${doctor.id}"></td>
+            <td th:text="${doctor.name}"></td>
+            <td th:text="${doctor.specialization}"></td>
+            <td th:text="${doctor.phone}"></td>
+            <td th:text="${doctor.email}"></td>
+            <td th:text="${doctor.qualification}"></td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
