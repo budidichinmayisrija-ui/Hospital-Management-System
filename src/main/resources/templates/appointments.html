@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Appointment Management</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f6fc;
+            margin: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #234a75;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        input, textarea {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0 15px;
+        }
+
+        button {
+            background: #1677c8;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #234a75;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Appointment Management System</h1>
+
+    <h2>Book an Appointment</h2>
+
+    <form action="/appointments" method="post">
+
+        <label>Patient Name:</label>
+        <input type="text" name="patientName" required>
+
+        <label>Doctor Name:</label>
+        <input type="text" name="doctorName" required>
+
+        <label>Appointment Date:</label>
+        <input type="date" name="appointmentDate" required>
+
+        <label>Appointment Time:</label>
+        <input type="time" name="appointmentTime" required>
+
+        <label>Reason for Appointment:</label>
+        <textarea name="reason" rows="3" required></textarea>
+
+        <button type="submit">Book Appointment</button>
+
+    </form>
+
+    <h2>Registered Appointments</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Patient Name</th>
+            <th>Doctor Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Reason</th>
+        </tr>
+
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.id}"></td>
+            <td th:text="${appointment.patientName}"></td>
+            <td th:text="${appointment.doctorName}"></td>
+            <td th:text="${appointment.appointmentDate}"></td>
+            <td th:text="${appointment.appointmentTime}"></td>
+            <td th:text="${appointment.reason}"></td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
