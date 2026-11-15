@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Billing and Payment Management</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f6fa;
+            margin: 30px;
+        }
+
+        h1 {
+            color: #174a7e;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #174a7e;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #174a7e;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Billing and Payment Management</h1>
+
+    <h2>Generate Patient Bill</h2>
+
+    <form action="/bills" method="post">
+
+        <label>Patient Name</label>
+        <input type="text" name="patientName" required>
+
+        <label>Bill Date</label>
+        <input type="date" name="billDate" required>
+
+        <label>Consultation Fee (₹)</label>
+        <input type="number" name="consultationFee"
+               min="0" step="0.01" required>
+
+        <label>Medicine Charges (₹)</label>
+        <input type="number" name="medicineCharges"
+               min="0" step="0.01" required>
+
+        <label>Room Charges (₹)</label>
+        <input type="number" name="roomCharges"
+               min="0" step="0.01" required>
+
+        <label>Payment Status</label>
+        <select name="paymentStatus" required>
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+        </select>
+
+        <button type="submit">Save Patient Bill</button>
+
+    </form>
+
+    <h2>Patient Billing Records</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patient Name</th>
+                <th>Bill Date</th>
+                <th>Consultation Fee</th>
+                <th>Medicine Charges</th>
+                <th>Room Charges</th>
+                <th>Total Amount</th>
+                <th>Payment Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="bill : ${bills}">
+                <td th:text="${bill.id}"></td>
+                <td th:text="${bill.patientName}"></td>
+                <td th:text="${bill.billDate}"></td>
+                <td th:text="${bill.consultationFee}"></td>
+                <td th:text="${bill.medicineCharges}"></td>
+                <td th:text="${bill.roomCharges}"></td>
+                <td th:text="${bill.totalAmount}"></td>
+                <td th:text="${bill.paymentStatus}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
