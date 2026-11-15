@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Laboratory Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6fc;
+            margin: 30px;
+        }
+
+        h1 {
+            color: #1b4f72;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        input {
+            padding: 10px;
+            margin: 8px;
+            width: 90%;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #1b4f72;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1b4f72;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Laboratory Management System</h1>
+
+    <h2>Add Laboratory Test Details</h2>
+
+    <form action="/lab-tests" method="post">
+
+        <input type="text" name="patientName"
+               placeholder="Patient Name" required>
+
+        <input type="text" name="testName"
+               placeholder="Laboratory Test Name" required>
+
+        <input type="date" name="testDate" required>
+
+        <input type="text" name="result"
+               placeholder="Test Result" required>
+
+        <input type="number" step="0.01" name="charges"
+               placeholder="Test Charges" required>
+
+        <button type="submit">Save Test Details</button>
+
+    </form>
+
+    <h2>Laboratory Test Records</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patient Name</th>
+                <th>Test Name</th>
+                <th>Test Date</th>
+                <th>Result</th>
+                <th>Charges</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="test : ${labTestList}">
+                <td th:text="${test.id}"></td>
+                <td th:text="${test.patientName}"></td>
+                <td th:text="${test.testName}"></td>
+                <td th:text="${test.testDate}"></td>
+                <td th:text="${test.result}"></td>
+                <td th:text="${test.charges}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
