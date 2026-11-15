@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patient Medical Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f6fa;
+            margin: 30px;
+        }
+
+        h1 {
+            color: #174a7e;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #174a7e;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #174a7e;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Patient Medical Records Management</h1>
+
+    <h2>Add Medical Record</h2>
+
+    <form action="/medical-records" method="post">
+
+        <label>Patient Name</label>
+        <input type="text" name="patientName" required>
+
+        <label>Doctor Name</label>
+        <input type="text" name="doctorName" required>
+
+        <label>Diagnosis</label>
+        <textarea name="diagnosis" required></textarea>
+
+        <label>Treatment</label>
+        <textarea name="treatment"></textarea>
+
+        <label>Medicines</label>
+        <textarea name="medicines"></textarea>
+
+        <label>Record Date</label>
+        <input type="date" name="recordDate" required>
+
+        <button type="submit">Save Medical Record</button>
+
+    </form>
+
+    <h2>Existing Medical Records</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Diagnosis</th>
+                <th>Treatment</th>
+                <th>Medicines</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="record : ${medicalRecords}">
+                <td th:text="${record.id}"></td>
+                <td th:text="${record.patientName}"></td>
+                <td th:text="${record.doctorName}"></td>
+                <td th:text="${record.diagnosis}"></td>
+                <td th:text="${record.treatment}"></td>
+                <td th:text="${record.medicines}"></td>
+                <td th:text="${record.recordDate}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
