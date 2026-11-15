@@ -1,0 +1,28 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital-management-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hospital-management-system
+  template:
+    metadata:
+      labels:
+        app: hospital-management-system
+    spec:
+      containers:
+        - name: hospital-management-system
+          image: lucky8919/hospital-management-system:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8087
+          volumeMounts:
+            - name: hospital-db-storage
+              mountPath: /app/data
+      volumes:
+        - name: hospital-db-storage
+          persistentVolumeClaim:
+            claimName: hospital-db-pvc
